@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 void inicializar_tablero(tablero* tab){
 
@@ -13,7 +14,7 @@ void inicializar_tablero(tablero* tab){
         }
     }
 }
-
+/*
 void imprimir_tablero(tablero tab){
     int i=0,j=0;
     fprintf(stdout,"\n      %d       %d       %d       %d",j,j+1,j+2,j+3);
@@ -27,25 +28,41 @@ void imprimir_tablero(tablero tab){
     }
     fprintf(stdout,"\n\n\n");
 }
+*/
+
+void imprimir_tablero(tablero tab){
+    int i=0,j=0;
+    fprintf(stdout,"\n      %d       %d       %d       %d",j,j+1,j+2,j+3);
+    fprintf(stdout,"\n  +-------+-------+-------+-------+");
+    for(i=0 ; i<TAM_TAB ; i++){
+        fprintf(stdout,"\n%d |",i);
+        for(j=0 ; j<TAM_TAB ; j++){
+            imprimir_celda(tab.t[i][j]);
+        }
+        fprintf(stdout,"\n  |-------+-------+-------+-------|");
+    }
+    fprintf(stdout,"\n\n\n");
+}
+
 
 void imprimir_celda(int valor){
     if(valor == 0 ){
-        fprintf(stdout, "       \u2502");
+        fprintf(stdout, "       |");
     }
     else if(valor < 10)
     {
-        fprintf(stdout, "   %d   \u2502", valor);
+        fprintf(stdout, "   %d   |", valor);
     }else if(valor < 100)
     {
-        fprintf(stdout, "  %d   \u2502", valor);
+        fprintf(stdout, "  %d   |", valor);
     }
     else if(valor < 1000)
     {
-        fprintf(stdout, "  %d  \u2502", valor);
+        fprintf(stdout, "  %d  |", valor);
     }
     else
     {
-        fprintf(stdout, " %d  \u2502", valor);
+        fprintf(stdout, " %d  |", valor);
     }
 }
 
@@ -129,27 +146,24 @@ void mover_tablero(tablero* tab, direccion dir){
 
 void mover_tablero_arriba(tablero* tab)
 {
-     int i,j;
-     for(i=1; i<TAM_TAB;i++)
+     int i,j;   //Recorremos el tablero empezando por la esquina superior derecha
+     for(i=0; i<TAM_TAB;i++)
      {
-        for(j=0; j<TAM_TAB;j++)
+        for(j=0;j<TAM_TAB;j++)
         {
-            if( tab->t[i][j] != 0 )
-            {
-                mover_casilla_arriba(tab,i,j);
-                imprimir_tablero(*(tab));
-                usleep(200000);
+            if(!casilla_vacia(tab->t[i][j])){
+                mover_casilla_arriba(tab, i, j);
             }
         }
-    }
+     }
 }
 
 void mover_tablero_abajo(tablero* tab)
 {
-    int i,j;
-     for(i=TAM_TAB-1; i>=0;i--)
+    int i,j; //Recorremos el tablero de abajo a arriba.
+     for( i=TAM_TAB-1; i >= 0; i--)
      {
-        for(j=0; j<TAM_TAB;j++)
+        for(j=0; j<TAM_TAB;j++) //Las columnas de izda a dcha.
         {
             if( tab->t[i][j] != 0 )
             {
@@ -162,9 +176,9 @@ void mover_tablero_abajo(tablero* tab)
 void mover_tablero_izquierda(tablero* tab)
 {
     int i,j;
-     for(i=0; i<TAM_TAB;i++)
+     for(j=0; j<TAM_TAB;i++)
      {
-        for(j=0; j<TAM_TAB;j++)
+        for(i=0; i<TAM_TAB;i++)
         {
             if( tab->t[i][j] != 0 )
             {
@@ -177,9 +191,9 @@ void mover_tablero_izquierda(tablero* tab)
 void mover_tablero_derecha(tablero* tab)
 {
     int i,j;
-    for(i=TAM_TAB-1; i>=0;i++)
+    for(j=TAM_TAB-1; j>=0;j++)
     {
-        for(j=0; j<TAM_TAB;j++)
+        for(i=0; i<TAM_TAB;i++)
         {
             if( tab->t[i][j] != 0 )
             {
@@ -188,6 +202,19 @@ void mover_tablero_derecha(tablero* tab)
         }
     }
 }
+
+
+bool casilla_vacia(int valor){
+    bool retorno;
+    if (valor == 0){
+        retorno = true;
+    }
+    else{
+        retorno = false;
+    }
+    return retorno;
+}
+
 
 
 void mover_casilla_arriba(tablero* tab, int f, int c){

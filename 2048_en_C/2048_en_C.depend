@@ -14,3 +14,20 @@
 	<stdbool.h>
 	<stdlib.h>
 
+1479212629 source:c:\users\teo\proyectos\entornos\2048_en_c\2048_en_c\2048.c
+	"2048.h"
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	<unistd.h>
+	<fcntl.h>
+
+1479209733 c:\users\teo\proyectos\entornos\2048_en_c\2048_en_c\2048.h
+	<stdbool.h>
+
+1479212796 source:c:\users\teo\proyectos\entornos\2048_en_c\2048_en_c\main.c
+	<stdio.h>
+	<stdlib.h>
+	"2048.h"
+	<stdbool.h>
+

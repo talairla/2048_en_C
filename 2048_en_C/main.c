@@ -5,6 +5,7 @@
 
 int main()
 {
+
     tablero t;
     direccion dir;
     inicializar_tablero(&t);
