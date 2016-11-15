@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1479156135 source:/home/teo/proyectos/entornos/2048_en_C/2048_en_C/main.c
+	<stdio.h>
+	<stdlib.h>
+	"2048.h"
+	<stdbool.h>
+
+1479155319 /home/teo/proyectos/entornos/2048_en_C/2048_en_C/2048.h
+	<stdbool.h>
+
+1479156103 source:/home/teo/proyectos/entornos/2048_en_C/2048_en_C/2048.c
+	"2048.h"
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+
